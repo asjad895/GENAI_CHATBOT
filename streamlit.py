@@ -20,15 +20,13 @@ st.write("Ask me anything!")
 if 'session_id' not in st.session_state:
     st.session_state.session_id = "12345"
 
-if 'chat_history' not in st.session_state:
-    st.session_state.chat_history = chat_history
 
 async def generate_response(user_query: str, session_id: str):
     try:
         kwargs = {"keys": ['intents'], "values": [constant.intents_des]}
         system_message = await prompt_template.format(chatbot_prompt=False, intent_classifier_prompt=True,kwargs=kwargs)
         print(system_message)
-        intent_result = intent_classifier(model, tokenizer, system_message, user_query, 'cpu')
+        intent_result = await intent_classifier(chat,system_message, user_query, 'cpu')
 
         if intent_result not in constant.expected_intents:
             intent_result = 'other'
@@ -36,7 +34,7 @@ async def generate_response(user_query: str, session_id: str):
         await chat_history.add_message("user", user_query)
 
         system_chat = await prompt_template.format(chatbot_prompt=True, intent_classifier_prompt=False)
-        messages = [system_chat] + st.session_state.chat_history
+        messages = [system_chat] + chat_history.chat_history
         genration_config = config.generation_config.GENERATION_PARAMS
 
         chat_response = await chat.create(messages, kwargs=genration_config)
@@ -58,6 +56,4 @@ if user_query:
 
     st.write(f"**Bot**: {response_data['response']}")
 
-    st.session_state.chat_history.append({"role": "user", "message": user_query})
-    st.session_state.chat_history.append({"role": "assistant", "message": response_data['response']})
 

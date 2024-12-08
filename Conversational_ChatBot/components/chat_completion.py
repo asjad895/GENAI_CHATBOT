@@ -22,7 +22,7 @@ class ChatCompletion:
             # self.llm = LLM(model=self.vllm_model_path, tokenizer=self.vllm_tokenizer_path)
             self.llm = Llama.from_pretrained(
                 repo_id="bartowski/Llama-3.2-3B-Instruct-GGUF",
-	            filename="Llama-3.2-3B-Instruct-IQ1_M.gguf",
+	            filename="Llama-3.2-3B-Instruct-IQ3_M.gguf",
                 )
 
         else:
