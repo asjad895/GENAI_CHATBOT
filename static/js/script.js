@@ -15,12 +15,13 @@ async function sendMessage() {
     input.value = "";
 
     // Send message to the server
+    console.log("yes")
     const response = await fetch("/generative_response", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ message })
+        body: JSON.stringify({ user_query: message })
     });
 
     const data = await response.json();

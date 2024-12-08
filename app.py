@@ -7,8 +7,17 @@ from Conversational_ChatBot import config
 from Conversational_ChatBot import constant
 from Conversational_ChatBot.components import load_model, intent, prompt_template, chat_completion, chat_history
 from typing import Dict
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -31,7 +40,7 @@ async def read_index():
     return HTMLResponse(content)
 
 
-@app.post("/generate-response/")
+@app.post("/generative_response/")
 async def generate_response(request: Request) -> JSONResponse:
     """
     Endpoint to get a generative response based on user query and session_id.
@@ -39,7 +48,7 @@ async def generate_response(request: Request) -> JSONResponse:
     try:
         request_data = await request.json()
         user_query = request_data.get("user_query")
-        session_id = request_data.get("session_id")
+        session_id = request_data.get("session_id",'session_id')
         logger.info("Received user query: %s with session_id: %s", user_query, session_id)
 
         kwargs = {"keys": ['intents'], "values": [constant.intents_des]}
@@ -70,12 +79,9 @@ async def generate_response(request: Request) -> JSONResponse:
             "response": chat_response
         }
 
-        return JSONResponse(content=response_data, status_code=200)
+        return {response_data}
 
     except Exception as e:
         logger.error("Error processing request: %s", str(e))
-        return JSONResponse(
-            content={"response": "An error occurred while processing the request"},
-            status_code=500
-        )
+        return {"response": "An error occurred while processing the request"},
 

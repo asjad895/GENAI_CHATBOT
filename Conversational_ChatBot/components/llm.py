@@ -69,7 +69,8 @@ class LLM:
           
         #   model.save_pretrained(save_dir, from_pt=True)
         #   tokenizer.save_pretrained(save_dir)
-
+          model = None,
+          tokenizer = None
           return model, tokenizer
         else:
           print("Loading UnQuantized Model")
