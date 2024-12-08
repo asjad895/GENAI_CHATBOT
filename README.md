@@ -1,6 +1,21 @@
-# Project Name
+# GENAI Chatbot
 
-A brief description of the project and its purpose.
+Objective:
+Create a domain-specific chatbot capable of answering queries in Healthcare, Insurance, Finance, and Retail domains using the Mixtral Model / LLAMA. The chatbot should also gracefully handle out-of-domain queries by responding:
+"I can only assist with queries related to Healthcare, Insurance, Finance, or Retail."
+Additionally, build a web application using Streamlit or FastAPI to interact with the chatbot.
+
+Instructions:
+1. Core Functionality
+Domain-Specific Queries:
+The chatbot must provide accurate and contextually relevant answers for queries from the specified domains:
+Healthcare: Example - Symptoms of common diseases, appointment scheduling, etc.
+Insurance: Example - Policy details, claim processes, coverage-related queries, etc.
+Finance: Example - Investment options, loan inquiries, credit card issues, etc.
+Retail: Example - Product availability, pricing, order tracking, etc.
+Out-of-Domain Handling:
+For queries outside the specified domains, the chatbot must respond with:
+"I can only assist with queries related to Healthcare, Insurance, Finance, or Retail.
 
 ## Prerequisites
 
@@ -70,4 +85,11 @@ Make sure you have the following installed:
 This project is licensed under the MIT License. See the `LICENSE` file for more information.
 
 ---
+
+## Experiment (Quick)
+**Linting Code**:
+  ```bash
+  check dir Research/llama
+  ```
+
 
