@@ -5,10 +5,10 @@ from Conversational_ChatBot import constant
 from Conversational_ChatBot.components import load_model, intent, prompt_template, chat_completion, chat_history
 import asyncio
 
-model, tokenizer = load_model.get_model()
+# model, tokenizer = load_model.get_model()
 intent_classifier = intent.get_intent
 chat_history = chat_history.ChatHistory()
-chat = chat_completion.ChatCompletion(model=model, tokenizer=tokenizer)
+chat = chat_completion.ChatCompletion(vllm_model_path ='../loaded_model/Llama-3.2-3B-Instruct-IQ3_M.gguf' , vllm_tokenizer_path='meta-llama/Llama-3.2-3B-Instruct')
 prompt_template = prompt_template.PromptTemplate()
 
 logging.basicConfig(level=logging.INFO)
