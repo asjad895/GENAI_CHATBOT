@@ -55,9 +55,10 @@ class ChatCompletion:
         conversation = [{'role': msg['role'], 'content': msg['content']} for msg in messages]
         sampling_params = SamplingParams(temperature=temperature, top_p=top_p)
 
-        outputs = self.llm.chat(conversation, sampling_params)
-        generated_text = outputs[0].outputs[0].text if outputs else "Error generating response"
-        
+        # outputs = self.llm.chat(conversation, sampling_params)
+        # generated_text = outputs[0].outputs[0].text if outputs else "Error generating response"
+        output = self.llm.create_chat_completion(messages = conversation)
+        print(output)
         return generated_text
 
     async def transformers_response(self, messages: List[Dict], max_new_tokens: int, temperature: float, top_p: float, do_sample: bool, repetition_penalty: float, eos_token_id: int, pad_token_id: int) -> str:
