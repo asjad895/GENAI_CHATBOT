@@ -1,6 +1,6 @@
 from .llm import LLM
 
 def get_model():
-    model,tokenizer = await LLM()
+    model,tokenizer = LLM()
     return model,tokenizer
 
