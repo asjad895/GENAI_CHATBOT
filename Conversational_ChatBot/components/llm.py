@@ -6,6 +6,9 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers import BitsAndBytesConfig
 from ..config import MODEL_SAVE_DIR
 import os
+from dotenv import load_dotenv
+load_dotenv()
+hf_token = os.getenv("HF_TOKEN")
 
 def gpu_memory_decorator(func):
     @wraps(func)
@@ -53,10 +56,11 @@ class LLM:
                 model_id,
                 device_map="auto",
                 torch_dtype=torch.bfloat16,
-                quantization_config=quantization_config
+                quantization_config=quantization_config,
+                use_auth_token=hf_token
               )
             # Load the tokenizer
-            tokenizer = AutoTokenizer.from_pretrained(model_id)
+            tokenizer = AutoTokenizer.from_pretrained(model_id,use_auth_token=hf_token)
           
           model.save_pretrained(save_dir, from_pt=True)
           tokenizer.save_pretrained(save_dir)
@@ -64,8 +68,8 @@ class LLM:
           return model, tokenizer
         else:
           print("Loading UnQuantized Model")
-          model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", torch_dtype=torch.bfloat16)
-          tokenizer = AutoTokenizer.from_pretrained(model_id)
+          model = AutoModelForCausalLM.from_pretrained(model_id, device_map="auto", torch_dtype=torch.bfloat16,use_auth_token=hf_token)
+          tokenizer = AutoTokenizer.from_pretrained(model_id,use_auth_token=hf_token)
           return model, tokenizer
 
     def _get_gpu_memory(self) -> float:
