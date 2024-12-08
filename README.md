@@ -87,7 +87,6 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 ---
 
 ## Experiment (Quick)
-**Linting Code**:
   ```bash
   check dir Research/llama
   ```
