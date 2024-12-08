@@ -18,7 +18,7 @@ class PromptTemplate:
        if isinstance(self.fill_keys,list):
            raise(f"'fill_keys' should be List of string which have to format in prompt.")
 
-    def format(self,chatbot_prompt = True,**kwargs :Dict) ->Dict:
+    async def format(self,chatbot_prompt = True,**kwargs :Dict) ->Dict:
         # keys : List[str] = ['intents'],
         # values :str = [intents_des]
         if chatbot_prompt:

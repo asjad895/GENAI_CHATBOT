@@ -11,11 +11,13 @@ app = FastAPI()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-model, tokenizer = load_model()
+model, tokenizer = load_model.get_model()
 
 intent_classifier = intent.get_intent
 chat_history = chat_history.ChatHistory()
 chat = chat_completion.ChatCompletion(model=model, tokenizer=tokenizer)
+
+prompt_template = prompt_template.PromptTemplate()
 
 @app.post("/generate-response/")
 async def generate_response(request: Request) -> JSONResponse:
@@ -28,9 +30,8 @@ async def generate_response(request: Request) -> JSONResponse:
         session_id = request_data.get("session_id")
         logger.info("Received user query: %s with session_id: %s", user_query, session_id)
 
-        prompt_template = prompt_template.PromptTemplate()
         kwargs = {"keys": ['intents'], "values": [constant.intents_des]}
-        system_message = prompt_template.format(chatbot_prompt=False, intent_classifier_prompt=True)
+        system_message = await prompt_template.format(chatbot_prompt=False, intent_classifier_prompt=True)
         logger.info("System Message: %s", system_message)
         intent_result = intent_classifier(model, tokenizer, system_message, user_query, model.device)
         logger.info("Extracted Intent: %s", intent_result)
@@ -38,10 +39,10 @@ async def generate_response(request: Request) -> JSONResponse:
         if intent_result not in constant.expected_intents:
             intent_result = 'other' 
 
-        chat_history.add_message("user", user_query)
+        await chat_history.add_message("user", user_query)
 
         # 
-        system_chat = prompt_template.format(chatbot_prompt=True, intent_classifier_prompt=False)
+        system_chat = await prompt_template.format(chatbot_prompt=True, intent_classifier_prompt=False)
 
         messages = [system_chat]+chat_history.chat_history
 
@@ -50,8 +51,7 @@ async def generate_response(request: Request) -> JSONResponse:
         chat_response = await chat.create(messages,kwargs=genration_config)
         logger.info("Generated Chat Response: %s", chat_response)
 
-        chat_history.add_message('user',user_query)
-        chat_history.add_message("assistant", chat_response)
+        await chat_history.add_message("assistant", chat_response)
 
         response_data = {
             "session_id": session_id,

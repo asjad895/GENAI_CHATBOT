@@ -20,7 +20,7 @@ class ChatCompletion:
         else:
             raise Exception("'model' or 'tokenizer' not found")
 
-    def create(self, messages: List[Dict], **kwargs) -> str:
+    async def create(self, messages: List[Dict], **kwargs) -> str:
         """
         Generates a response to the provided messages using the model, and appends the message to the chat history.
         """
@@ -56,7 +56,7 @@ class ChatCompletion:
 
         return response
 
-    def clear_history(self) -> None:
+    async def clear_history(self) -> None:
         """
         Clears the chat history.
         """

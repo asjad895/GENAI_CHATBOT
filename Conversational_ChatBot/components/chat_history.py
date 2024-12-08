@@ -35,7 +35,7 @@ class ChatHistory:
         """
         self.chat_history = []
 
-    def add_message(self, role: str, content: str) -> None:
+    async def add_message(self, role: str, content: str) -> None:
         """
         Adds a message to the chat history.
 
@@ -48,7 +48,7 @@ class ChatHistory:
         """
         self.chat_history.append({"role": role, "content": content})
 
-    def get_chat_history(self) -> List[Dict]:
+    async def get_chat_history(self) -> List[Dict]:
         """
         Retrieves the entire chat history.
 
@@ -58,7 +58,7 @@ class ChatHistory:
         """
         return self.chat_history
 
-    def clear_chat_history(self) -> None:
+    async def clear_chat_history(self) -> None:
         """
         Clears the entire chat history.
 
@@ -69,7 +69,7 @@ class ChatHistory:
         """
         self.chat_history = []
 
-    def __len__(self) -> int:
+    async def __len__(self) -> int:
         """
         Returns the number of messages in the chat history.
 
