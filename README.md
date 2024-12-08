@@ -88,7 +88,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 ## Experiment (Quick)
   ```bash
-  check dir Research/llama
+  check Research/llama_experiment.ipynb
   ```
 
 
