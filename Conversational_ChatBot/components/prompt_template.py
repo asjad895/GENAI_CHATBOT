@@ -30,7 +30,7 @@ class PromptTemplate:
             system = self.intent_classifier_prompt
 
         
-        if self.fill_keys:
+        if self.fill_keys and 'keys' in kwargs:
             context = dict(zip(kwargs['keys'], kwargs['values']))
             template = Template(system)
             system = template.render(**context)
