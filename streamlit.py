@@ -25,7 +25,7 @@ async def generate_response(user_query: str, session_id: str):
     try:
         kwargs = {"keys": ['intents'], "values": [constant.intents_des]}
         system_message = await prompt_template.format(chatbot_prompt=False, intent_classifier_prompt=True,kwargs=kwargs)
-        print(system_message)
+        # print(system_message)
         intent_result = await intent_classifier(chat,system_message, user_query, 'cpu')
 
         if intent_result not in constant.expected_intents:

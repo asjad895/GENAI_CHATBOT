@@ -24,6 +24,7 @@ class ChatCompletion:
                 repo_id="bartowski/Llama-3.2-3B-Instruct-GGUF",
 	            filename="Llama-3.2-3B-Instruct-IQ3_M.gguf",
                 )
+            self.tokenizer = None
 
         else:
             raise Exception("Model or tokenizer not found")
@@ -38,11 +39,11 @@ class ChatCompletion:
         do_sample = kwargs.get('do_sample', False)
         repetition_penalty = kwargs.get('repetition_penalty', 1.0)
         eos_token_id = kwargs.get('eos_token_id', None)
-        pad_token_id = kwargs.get('pad_token_id', self.tokenizer.eos_token_id if hasattr(self.tokenizer, 'eos_token_id') else None)
+        # pad_token_id = kwargs.get('pad_token_id', self.tokenizer.eos_token_id if self.tokenizer  and if hasattr(self.tokenizer, 'eos_token_id') else None)
         
         # If device is CPU, use vllm model for response
         if self.device == 'cpu':
-            return await self.vllm_response(messages, max_new_tokens, temperature, top_p, do_sample, repetition_penalty, eos_token_id, pad_token_id)
+            return await self.vllm_response(messages, max_new_tokens, temperature, top_p, do_sample, repetition_penalty, eos_token_id, self.llm.token_eos)
         else:
             # If device is GPU, use transformers-based model
             return await self.transformers_response(messages, max_new_tokens, temperature, top_p, do_sample, repetition_penalty, eos_token_id, pad_token_id)
@@ -58,7 +59,7 @@ class ChatCompletion:
         # outputs = self.llm.chat(conversation, sampling_params)
         # generated_text = outputs[0].outputs[0].text if outputs else "Error generating response"
         output = self.llm.create_chat_completion(messages = conversation)
-        print(output)
+        generated_text = output.choices[0].messages.content
         return generated_text
 
     async def transformers_response(self, messages: List[Dict], max_new_tokens: int, temperature: float, top_p: float, do_sample: bool, repetition_penalty: float, eos_token_id: int, pad_token_id: int) -> str:
