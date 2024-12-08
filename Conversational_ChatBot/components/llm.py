@@ -4,7 +4,7 @@ from functools import wraps
 from typing import Tuple
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from transformers import BitsAndBytesConfig
-from ..config import MODEL_SAVE_DIR
+from Conversational_ChatBot.config import MODEL_SAVE_DIR
 import os
 from dotenv import load_dotenv
 load_dotenv()

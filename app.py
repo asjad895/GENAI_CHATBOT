@@ -1,9 +1,9 @@
 import logging
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-from .Conversational_ChatBot import config
-from .Conversational_ChatBot import constant
-from .Conversational_ChatBot.components import load_model, intent, prompt_template, chat_completion, chat_history
+from Conversational_ChatBot import config
+from Conversational_ChatBot import constant
+from Conversational_ChatBot.components import load_model, intent, prompt_template, chat_completion, chat_history
 from typing import Dict
 
 app = FastAPI()
