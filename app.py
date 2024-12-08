@@ -1,6 +1,8 @@
 import logging
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse,HTMLResponse,FileResponse
+from fastapi.staticfiles import StaticFiles
+
 from Conversational_ChatBot import config
 from Conversational_ChatBot import constant
 from Conversational_ChatBot.components import load_model, intent, prompt_template, chat_completion, chat_history
@@ -18,6 +20,16 @@ chat_history = chat_history.ChatHistory()
 chat = chat_completion.ChatCompletion(model=model, tokenizer=tokenizer)
 
 prompt_template = prompt_template.PromptTemplate()
+
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/")
+async def read_index():
+    with open("static/index.html", "r") as file:
+        content = file.read()
+    return HTMLResponse(content)
+
 
 @app.post("/generate-response/")
 async def generate_response(request: Request) -> JSONResponse:
@@ -52,10 +64,9 @@ async def generate_response(request: Request) -> JSONResponse:
         logger.info("Generated Chat Response: %s", chat_response)
 
         await chat_history.add_message("assistant", chat_response)
-
+        chat_response = chat_response+f"\nDomain:{intent_result}"
         response_data = {
             "session_id": session_id,
-            "intent": intent_result,
             "response": chat_response
         }
 
@@ -64,7 +75,7 @@ async def generate_response(request: Request) -> JSONResponse:
     except Exception as e:
         logger.error("Error processing request: %s", str(e))
         return JSONResponse(
-            content={"error": "An error occurred while processing the request"},
+            content={"response": "An error occurred while processing the request"},
             status_code=500
         )
 

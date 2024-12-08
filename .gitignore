@@ -1,5 +1,6 @@
 genai/
 .env
+env/
 __pycache__/
 Conversational_ChatBot/components/__pycache__/
 Conversational_ChatBot/__pycache__/
