@@ -393,3 +393,9 @@ Example:
     "user_query": "What's the weather like today?",
     "session_id": "12345"
 }
+
+[Healthcare](https://www.loom.com/share/dff649e3149c404f96334b8e0b48396a?sid=0337e364-ed2d-4a35-9418-37ffd22ebdcf)
+[Insurance](https://www.loom.com/share/7dcb09249de64566af6dd565cb3932f0?sid=5a8ef02a-c758-4b3d-a2e7-ffc16d522ffb)
+[Retail](https://www.loom.com/share/dff649e3149c404f96334b8e0b48396a?sid=0337e364-ed2d-4a35-9418-37ffd22ebdcf)
+[Finance](https://www.loom.com/share/7dcb09249de64566af6dd565cb3932f0?sid=5a8ef02a-c758-4b3d-a2e7-ffc16d522ffb)
+

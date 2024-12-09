@@ -52,7 +52,7 @@ async def generate_response(user_query: str, session_id: str):
         st.session_state.chat_history.append({"role": "assistant", "content": chat_response})
 
         # Append domain information
-        chat_response += f"\nDomain: {intent_result}"
+        chat_response += f"\n\nDomain: {intent_result}"
         return {"session_id": session_id, "response": chat_response}
     
     except Exception as e:

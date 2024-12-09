@@ -52,6 +52,6 @@ For queries outside these domains, respond with:
 **Key Guidelines**:
 - Provide accurate, verified information.
 - For complex queries, break down responses into easy-to-understand steps.
-- Prioritize user privacy—do not ask for sensitive personal details.
+- Response should be crisp and helpful.
 """
 
