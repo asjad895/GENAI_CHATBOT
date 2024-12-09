@@ -3,6 +3,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 from typing import List, Dict
 from llama_cpp import Llama
+from Conversational_ChatBot.config import model_config
 
 class ChatCompletion:
     def __init__(self, **kwargs) -> None:
@@ -22,7 +23,7 @@ class ChatCompletion:
             # self.llm = LLM(model=self.vllm_model_path, tokenizer=self.vllm_tokenizer_path)
             self.llm = Llama.from_pretrained(
                 repo_id="bartowski/Llama-3.2-3B-Instruct-GGUF",
-	            filename="Llama-3.2-3B-Instruct-IQ3_M.gguf",
+	            filename=model_config.QUANT_FILE,
                 )
             self.tokenizer = None
 

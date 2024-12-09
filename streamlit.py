@@ -59,11 +59,11 @@ async def generate_response(user_query: str, session_id: str):
         logger.error("Error processing request: %s", e)
         return {"response": "An error occurred while processing the request"}
 
-# Render the chat interface
+
 st.write("### Conversation")
 conversation_container = st.container()
 
-# Display conversation history
+
 with conversation_container:
     for message in st.session_state.chat_history:
         if message["role"] == "user":
@@ -71,10 +71,10 @@ with conversation_container:
         elif message["role"] == "assistant":
             st.chat_message("Assistant").markdown(f"**Bot:** {message['content']}")
 
-# User input and response generation
+
 user_query = st.text_input("Your question:")
 
 if user_query and st.button("Send"):
     with st.spinner("Getting response from bot..."):
         response_data = asyncio.run(generate_response(user_query, st.session_state.session_id))
-        st.session_state.user_query = ""  # Clear input field after submission
+        st.session_state.user_query = ""  
