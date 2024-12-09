@@ -20,7 +20,7 @@ async def get_intent(chat, system_message, query, device):
     try:
         # Generate response using the chat object
         response = await chat.create(messages, max_new_tokens=50, temperature=0.6)
-        intent_pred = response.strip()
+        intent_pred = response.strip().replace("```json",'').replace("```",'')
 
         try:
             # Parse the response as JSON
@@ -39,7 +39,7 @@ async def get_intent(chat, system_message, query, device):
                 },
             ]
             correction_response = await chat.create(correction_messages, max_new_tokens=50, temperature=0.6)
-            intent_pred = correction_response.strip()
+            intent_pred = correction_response.strip().replace("```json",'').replace("```",'')
 
             print(f"Corrected response: {intent_pred}")
             try:
