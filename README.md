@@ -399,7 +399,6 @@ Example:
 
 [Healthcare](https://www.loom.com/share/7dcb09249de64566af6dd565cb3932f0?sid=5a8ef02a-c758-4b3d-a2e7-ffc16d522ffb)
 [Insurance](https://www.loom.com/share/d8f4070c5d5d4a909b9fd9f680729457?sid=4edf0a97-34ce-4923-8abf-6a3e89d5f6d7)
-[Retail](https://www.loom.com/share/dff649e3149c404f96334b8e0b48396a?sid=0337e364-ed2d-4a35-9418-37ffd22ebdcf)
+[Retail](https://www.loom.com/share/2c3d5f47d9924792af5c8847c0830306?sid=5db904e3-b46d-48b2-8103-f8bd5873e88e)
 [Finance](https://www.loom.com/share/7dcb09249de64566af6dd565cb3932f0?sid=5a8ef02a-c758-4b3d-a2e7-ffc16d522ffb)
-
-<iframe width="640" height="360" src="https://www.loom.com/embed/d8f4070c5d5d4a909b9fd9f680729457?sid=c2416734-8a21-4ab8-82d8-a64f191946eb" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+[out_of_domain](https://www.loom.com/share/7dcb09249de64566af6dd565cb3932f0?sid=5a8ef02a-c758-4b3d-a2e7-ffc16d522ffb)
