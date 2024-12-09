@@ -53,3 +53,4 @@ async def get_intent(chat, system_message, query, device):
         intent_pred = {'intent': 'other'}
 
     return intent_pred
+

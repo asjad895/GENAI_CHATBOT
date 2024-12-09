@@ -28,9 +28,13 @@ class PromptTemplate:
              system = self.chatbot_prompt
         else:
             system = self.intent_classifier_prompt
+            template = Template(system)
+            system = template.render(intents = kwargs['values'][0])
+        
 
         
         if self.fill_keys and 'keys' in kwargs:
+            print("yes")
             context = dict(zip(kwargs['keys'], kwargs['values']))
             template = Template(system)
             system = template.render(**context)

@@ -42,6 +42,7 @@ class ChatCompletion:
         # pad_token_id = kwargs.get('pad_token_id', self.tokenizer.eos_token_id if self.tokenizer  and if hasattr(self.tokenizer, 'eos_token_id') else None)
         
         # If device is CPU, use vllm model for response
+        print("Total Conversation -> ",(len(messages)-1)//2)
         if self.device == 'cpu':
             return await self.vllm_response(messages, max_new_tokens, temperature, top_p, do_sample, repetition_penalty, eos_token_id, self.llm.token_eos)
         else:
@@ -59,7 +60,8 @@ class ChatCompletion:
         # outputs = self.llm.chat(conversation, sampling_params)
         # generated_text = outputs[0].outputs[0].text if outputs else "Error generating response"
         output = self.llm.create_chat_completion(messages = conversation)
-        generated_text = output.choices[0].messages.content
+        generated_text = output['choices'][0]['message']['content']
+        print(generated_text)
         return generated_text
 
     async def transformers_response(self, messages: List[Dict], max_new_tokens: int, temperature: float, top_p: float, do_sample: bool, repetition_penalty: float, eos_token_id: int, pad_token_id: int) -> str:
