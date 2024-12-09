@@ -394,7 +394,7 @@ Example:
     "session_id": "12345"
 }
 
----
+```
 
 
 [Healthcare](https://www.loom.com/share/dff649e3149c404f96334b8e0b48396a?sid=0337e364-ed2d-4a35-9418-37ffd22ebdcf)
